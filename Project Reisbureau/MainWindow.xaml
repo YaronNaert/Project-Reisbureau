@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_Reisbureau"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <StackPanel>
+        <Label Margin="0,10,0,10" HorizontalAlignment="Center" FontSize="30" FontFamily="Bodoni MT Black" BorderThickness="2" BorderBrush="Black">Reisbureau "Allons En Vacances"</Label>
+        <StackPanel Width="650">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label FontSize="20">Kies hier je vakantiesoort</Label>
+                <ComboBox Margin="20,0,0,0" Width="300" Name="Vakantiesoort" SelectionChanged="Vakantiesoort_SelectionChanged"></ComboBox>
+            </StackPanel>
+            <StackPanel Margin="00,10,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label FontSize="20">Kies hier je vakantiebestemming</Label>
+                <ComboBox Margin="20,0,0,0" Width="300" Name="VakantieBestemming" SelectionChanged="VakantieBestemming_SelectionChanged"></ComboBox>
+            </StackPanel>
+            <StackPanel Margin="00,10,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label FontSize="20">Kies hier je verblijfsplaats</Label>
+                <ComboBox Margin="20,0,0,0" Width="300" Name="Verblijf" SelectionChanged="Verblijf_SelectionChanged"></ComboBox>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+    
 </Window>
