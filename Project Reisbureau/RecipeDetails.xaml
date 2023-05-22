@@ -1,0 +1,50 @@
+﻿<Window x:Class="Project_Reisbureau.RecipeDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project_Reisbureau"
+        mc:Ignorable="d"
+        Title="RecipeDetails" Height="450" Width="800">
+    <Window.Resources>
+        <local:BooleanToYesNoConverter x:Key="BoolToYesNoConverter"/>
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="{Binding Name}" FontSize="20"/>
+
+        <TextBlock Grid.Row="1" Text="Ingredients:" FontSize="16" Margin="0,10,0,5"/>
+        <TextBlock Grid.Row="2" Text="{Binding Ingredients}" TextWrapping="Wrap"/>
+
+        <TextBlock Grid.Row="3" Text="Instructions:" FontSize="16" Margin="0,10,0,5"/>
+        <TextBlock Grid.Row="4" Text="{Binding Instructions}" TextWrapping="Wrap"/>
+
+        <TextBlock Grid.Row="5" Text="Dietary Restrictions:" FontSize="16" Margin="0,10,0,5"/>
+
+        <StackPanel Grid.Row="6" Orientation="Horizontal">
+            <TextBlock Text="Vegetarian: "/>
+            <TextBlock Text="{Binding Vegetarian, Converter={StaticResource BoolToYesNoConverter}}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="7" Orientation="Horizontal">
+            <TextBlock Text="Vegan: "/>
+            <TextBlock Text="{Binding Vegan, Converter={StaticResource BoolToYesNoConverter}}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="8" Orientation="Horizontal">
+            <TextBlock Text="Gluten Free: "/>
+            <TextBlock Text="{Binding GlutenFree, Converter={StaticResource BoolToYesNoConverter}}"/>
+        </StackPanel>
+        <Button Grid.Row="9" Content="Back to Recipes" Click="Button_Click"/>
+
+    </Grid>
+</Window>

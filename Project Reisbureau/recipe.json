@@ -1,0 +1,18 @@
+[
+  {
+    "Name": "Tomatensoep",
+    "Ingredients": "garlic, tomatoes,water,milk",
+    "Instructions": "Add water, peel the tomatoes. Put the tomatoes in water and let them boil.",
+    "Vegetarian": true,
+    "Vegan": false,
+    "GlutenFree": false
+  },
+  {
+    "Name": "Kip met aardappelen",
+    "Ingredients": "Kip, Aardappelen, Water",
+    "Instructions": "Doe alles samen in een pot en kook",
+    "Vegetarian": false,
+    "Vegan": false,
+    "GlutenFree": false
+  }
+]

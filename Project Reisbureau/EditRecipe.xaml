@@ -1,0 +1,42 @@
+﻿<Window x:Class="Project_Reisbureau.EditRecipe"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project_Reisbureau"
+        mc:Ignorable="d"
+        Title="Edit Recipe" Height="250" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Recipe name:"/>
+        <TextBox Grid.Row="1" Text="{Binding Name}"/>
+
+        <TextBlock Grid.Row="2" Text="Ingredients:"/>
+        <TextBox Grid.Row="3" Text="{Binding Ingredients}" TextWrapping="Wrap"/>
+
+        <TextBlock Grid.Row="4" Text="Instructions:"/>
+        <TextBox Grid.Row="5" Text="{Binding Instructions}" TextWrapping="Wrap"/>
+
+        <TextBlock Grid.Row="6" Text="Vegetarian:"/>
+        <CheckBox Grid.Row="5" IsChecked="{Binding Vegetarian}" Margin="67,17,293,1" Grid.RowSpan="2"/>
+
+        <TextBlock Grid.Row="7" Text="Vegan:"/>
+        <CheckBox Grid.Row="7" IsChecked="{Binding Vegan}" Checked="CheckBox_Checked" Margin="67,0,293,20" Grid.RowSpan="2"/>
+
+        <TextBlock Grid.Row="8" Text="Gluten Free:"/>
+        <CheckBox Grid.Row="8" IsChecked="{Binding GlutenFree}" Margin="67,0,293,0"/>
+
+        <Button Grid.Row="8" Content="Save Changes" Click="SaveChanges_Click" Margin="0,55,0,-55"/>
+    </Grid>
+</Window>

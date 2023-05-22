@@ -1,163 +1,73 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using static Project_Reisbureau.Recipes;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System;
+using System.IO;
 
 namespace Project_Reisbureau
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for InsertRecipe.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<String> strandvakantieL = new List<string> { "Costa del sol", "Côte d'Azur", "Costa Blanca", "Casablanca" };
-        List<String> CitytripL = new List<string> { "Budapest", "Berlijn", "Parijs", "Barcelona" };
-        List<String> SkivakantieL = new List<string> { "Zwitserse Alpen", "Franse Alpen", "Franse Pyreneeën", "Spaanse Pyreneeën"};
-
-        List<string> hotelNames1 = new List<string> { "Grand Hotel", "The Ritz-Carlton"};
-        List<string> hotelNames2 = new List<string> { "Marriott", "InterContinental"};
-        List<string> hotelNames3 = new List<string> { "Holiday Inn", "Radisson Blu"};
-        List<string> hotelNames4 = new List<string> { "Mandarin Oriental", "Shangri-La"};
-        List<string> hotelNames5 = new List<string> { "Fairmont", "JW Marriott"};
-        List<string> hotelNames6 = new List<string> { "Le Méridien", "Renaissance Hotels"};
-        List<string> hotelNames7 = new List<string> { "Hilton Garden Inn", "Hampton Inn"};
-        List<string> hotelNames8 = new List<string> { "Courtyard by Marriott", "SpringHill Suites"};
-        List<string> hotelNames9 = new List<string> { "DoubleTree", "Wyndham"};
-        List<string> hotelNames10 = new List<string> { "Best Western", "Super 8"};
-        List<string> hotelNames11 = new List<string> { "Extended Stay America", "Candlewood Suites"};
-        List<string> hotelNames12 = new List<string> { "Loews", "Omni"};
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Vakantiesoort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void AddRecipeButton_Click(object sender, RoutedEventArgs e)
         {
-           
-            VakantieBestemming.Items.Clear();
-            switch (Vakantiesoort.SelectedItem)
+            try
             {
-                case "Strandvakantie":
-                    Vakantiesoort.Items.Remove("Kies een vakantiesoort");
-                    foreach (String str in strandvakantieL)
-                    {
-                        VakantieBestemming.Items.Add(str);
-                    }
-                    break;
-                case "Citytrip":
-                    Vakantiesoort.Items.Remove("Kies een vakantiesoort");
-                    foreach (String str in CitytripL)
-                    {
-                        VakantieBestemming.Items.Add(str);
-                    }
-                    break;
-                case "Skivakantie":
-                    Vakantiesoort.Items.Remove("Kies een vakantiesoort");
-                    foreach (String str in SkivakantieL)
-                    {
-                        VakantieBestemming.Items.Add(str);
-                    }
-                    break;
-                case "Kajakvakantie":
-                    Vakantiesoort.Items.Remove("Kies een vakantiesoort");
-                    foreach (String str in KajakvakantieL)
-                    {
-                        VakantieBestemming.Items.Add(str);
-                    }
-                    break;
-                default:
-                    break;
+                Recipes.Recipe recipe = new Recipes.Recipe();
+                {
+                    recipe.Name = RecipeNameTextBox.Text;
+                    recipe.Ingredients = IngredientsTextBox.Text;
+                    recipe.Instructions = InstructionsTextBox.Text;
+                    recipe.Vegetarian = VegetarianCheckBox.IsChecked ?? false;
+                    recipe.Vegan = VeganCheckBox.IsChecked ?? false;
+                    recipe.GlutenFree = GlutenFreeCheckBox.IsChecked ?? false;
+                };
+
+                // Read the existing recipes from the JSON file
+                List<Recipes.Recipe> recipes = new List<Recipes.Recipe>();
+                string json = File.ReadAllText("C:\\Users\\naert\\Documents\\School\\S2\\OOP\\Project\\ProjectCode\\Project-Reisbureau\\Project Reisbureau\\recipe.json");
+                if (string.IsNullOrEmpty(json))
+                {
+                    recipes = new List<Recipe> { recipe };
+                }
+                recipes = JsonConvert.DeserializeObject<List<Recipe>>(json);
+                // Add the current recipe to the list
+                recipes.Add(recipe);
+
+                // Serialize the updated recipes list to JSON
+                string updatedJson = JsonConvert.SerializeObject(recipes);
+
+                // Write the JSON string to the file
+                File.WriteAllText("C:\\Users\\naert\\Documents\\School\\S2\\OOP\\Project\\ProjectCode\\Project-Reisbureau\\Project Reisbureau\\recipe.json", updatedJson);
+
+                MessageBox.Show("Recipes saved successfully.");
             }
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            Vakantiesoort.Items.Add("Kies een vakantiesoort");
-            Vakantiesoort.Items.Add("Strandvakantie");
-            Vakantiesoort.Items.Add("Citytrip");
-            Vakantiesoort.Items.Add("Skivakantie");
-            Vakantiesoort.Items.Add("Kajakvakantie");
-            Vakantiesoort.SelectedItem = "Kies een vakantiesoort";
-            VakantieBestemming.Items.Add("Kies een vakantiebestemming");
-            VakantieBestemming.SelectedItem = "Kies een vakantiebestemming";
-            Verblijf.Items.Add("Kies een verblijf");
-            Verblijf.SelectedItem = "Kies een verblijf";
-
-        }
-
-        private void VakantieBestemming_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Verblijf.Items.Clear();
-            switch (VakantieBestemming.SelectedItem)
+            catch (Exception ex)
             {
-                case "Costa del sol":
-                    // Do something
-                    break;
-                case "Côte d'Azur":
-                    // Do something
-                    break;
-                case "Costa Blanca":
-                    // Do something
-                    break;
-                case "Casablanca":
-                    // Do something
-                    break;
-                case "Budapest":
-                    // Do something
-                    break;
-                case "Berlijn":
-                    // Do something
-                    break;
-                case "Parijs":
-                    // Do something
-                    break;
-                case "Barcelona":
-                    // Do something
-                    break;
-                case "Zwitserse Alpen":
-                    // Do something
-                    break;
-                case "Franse Alpen":
-                    // Do something
-                    break;
-                case "Franse Pyreneeën":
-                    // Do something
-                    break;
-                case "Spaanse Pyreneeën":
-                    // Do something
-                    break;
-                case "Waalse Ardennen":
-                    // Do something
-                    break;
-                case "Zweedse meren":
-                    // Do something
-                    break;
-                case "Noorse meren":
-                    // Do something
-                    break;
-                case "Alaskaanse gletsjers":
-                    // Do something
-                    break;
-                default:
-                    // Handle the case where destination does not match any of the above cases
-                    break;
+                MessageBox.Show("An error occurred while saving the recipe: " + ex.Message);
             }
+
+
         }
 
-        private void Verblijf_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void OpenNewWindowButton_Click(object sender, RoutedEventArgs e)
         {
+            SeeRecipes newWindow = new SeeRecipes();
 
+            // Close the current window
+            this.Close();
+
+            // Show the new window
+            newWindow.Show();
         }
     }
 }

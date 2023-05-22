@@ -5,24 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_Reisbureau"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
-    <StackPanel>
-        <Label Margin="0,10,0,10" HorizontalAlignment="Center" FontSize="30" FontFamily="Bodoni MT Black" BorderThickness="2" BorderBrush="Black">Reisbureau "Allons En Vacances"</Label>
-        <StackPanel Width="650">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label FontSize="20">Kies hier je vakantiesoort</Label>
-                <ComboBox Margin="20,0,0,0" Width="300" Name="Vakantiesoort" SelectionChanged="Vakantiesoort_SelectionChanged"></ComboBox>
-            </StackPanel>
-            <StackPanel Margin="00,10,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label FontSize="20">Kies hier je vakantiebestemming</Label>
-                <ComboBox Margin="20,0,0,0" Width="300" Name="VakantieBestemming" SelectionChanged="VakantieBestemming_SelectionChanged"></ComboBox>
-            </StackPanel>
-            <StackPanel Margin="00,10,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label FontSize="20">Kies hier je verblijfsplaats</Label>
-                <ComboBox Margin="20,0,0,0" Width="300" Name="Verblijf" SelectionChanged="Verblijf_SelectionChanged"></ComboBox>
-            </StackPanel>
+        Title="MainWindow" Height="800" Width="800" FontSize="20">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Recipe Name:" VerticalAlignment="Center"/>
+            <TextBox x:Name="RecipeNameTextBox" Margin="10" Width="200"/>
         </StackPanel>
-        
-    </StackPanel>
-    
+
+        <StackPanel Grid.Row="1" Margin="10">
+            <TextBlock Text="Ingredients:"/>
+            <TextBox x:Name="IngredientsTextBox" TextWrapping="Wrap" AcceptsReturn="True" Height="100" Margin="0,5,0,10"/>
+
+            <TextBlock Text="Instructions:"/>
+            <TextBox x:Name="InstructionsTextBox" TextWrapping="Wrap" AcceptsReturn="True" Height="300" Margin="0,5,0,10"/>
+
+            <TextBlock Text="Dietary Restrictions:"/>
+            <CheckBox x:Name="VegetarianCheckBox" Content="Vegetarian" Margin="0,5,0,5"/>
+            <CheckBox x:Name="VeganCheckBox" Content="Vegan" Margin="0,5,0,5"/>
+            <CheckBox x:Name="GlutenFreeCheckBox" Content="Gluten Free" Margin="0,5,0,5"/>
+        </StackPanel>
+        <Button x:Name="OpenNewWindowButton" Content="See recipes" Margin="0,631,59,35" Width="179" HorizontalAlignment="Right" Click="OpenNewWindowButton_Click" Grid.Row="1"/>
+        <Button x:Name="AddRecipeButton" Content="Add recipes" Margin="0,581,59,84" Width="179" HorizontalAlignment="Right" Click="AddRecipeButton_Click" Grid.Row="1"/>
+
+    </Grid>
+
 </Window>
